@@ -1,0 +1,39 @@
+<div ng-controller="TimeTravelController">
+  <div class="card" ng-if="user != null && !user.isOnDeprecatedVersion">
+    <div class="card-header text-xs-center">
+      <h3>Time Travel</h3>
+      <p class="card-text"><i><mark>Close the app before making any time travel changes.</mark></i></p>
+    </div>
+    
+    <div class="card-block">
+      <p class="card-text text-xs-center">{{ getTimeTravelDisplay() }}</p>
+      <p class="card-text text-xs-center" ng-if="userInternal.getTimerChange('timeTravel') !== undefined"><i><mark>{{ getTimeTravelChangedDisplay() }}</mark></i></p>
+    </div>
+
+    <div class="card-footer">
+      <form class="input-group" ng-submit="updateTimeTravel()">
+        <input type="number" class="form-control" ng-model="timeTravelForm.inputValue" ng-disabled="isInputLocked">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary" ng-disabled="isInputLocked">Update</button>
+        </span>
+      </form>
+
+      <div class="btn-toolbar text-xs-center">
+        <br>
+        <label class="btn btn-secondary" ng-click="modifyInputValue(604800)"> + Week </label>
+        <label class="btn btn-secondary" ng-click="modifyInputValue(86400)"> + Day </label>
+        <label class="btn btn-secondary" ng-click="modifyInputValue(3600)"> + Hour </label>
+        <label class="btn btn-secondary" ng-click="modifyInputValue(60)"> + Min </label>
+      </div>
+
+      <div class="btn-toolbar text-xs-center">
+        <label class="btn btn-secondary" ng-click="modifyInputValue(-604800)"> - Week </label>
+        <label class="btn btn-secondary" ng-click="modifyInputValue(-86400)"> - Day </label>
+        <label class="btn btn-secondary" ng-click="modifyInputValue(-3600)"> - Hour </label>
+        <label class="btn btn-secondary" ng-click="modifyInputValue(-60)"> - Min </label>
+      </div>
+
+      <p class="card-text text-muted">{{ getTimeTravelInputDisplay() }}</p>
+    </div>
+  </div>
+</div>

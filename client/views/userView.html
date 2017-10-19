@@ -1,0 +1,96 @@
+<div ng-controller="UserController">
+  <!-- User Info -->
+  <div class="card">
+    <div class="card-header text-xs-center">
+      <h3>User Info</h3>
+      <div class="btn-toolbar text-xs-center" ng-if="user != null">
+        <label class="btn btn-success" ng-click="showEventHistory()"> Event History </label>
+        <label class="btn btn-success" ng-click="showIAPs()"> In-App Purchases </label>
+      </div>
+    </div>
+  
+    <div class="card-block">
+      <div ng-if="user == null">
+        <p class="card-text text-muted">No user info to display</p>
+      </div>
+      <div ng-if="user != null">
+        <div class="text-xs-center" ng-if="user.isOnDeprecatedVersion">
+          <p class="text-danger"><strong>This user is on a deprecated data format, and will not work with this admin tool.</strong></p>
+        </div>
+        <div ng-if="user.isCheater">
+          <p class="text-xs-center text-danger"><strong>This player is a cheater!</strong></p>
+        </div>
+        <div ng-if="!user.isCheater">
+          <p class="text-xs-center text-success"><strong>This player is squeaky clean.</strong></p>
+        </div>
+        <p><span class="col-sm-4 text-xs-right">PlayFab ID:</span><strong>{{ user.getPlayFabId() }}</strong></p>
+        <p><span class="col-sm-4 text-xs-right">Kong ID:</span><strong>{{ user.getKongregateId() }}</strong></p>
+        <p><span class="col-sm-4 text-xs-right">Kong Name:</span><strong>{{ user.getKongregateName() }}</strong></p>
+        <p><span class="col-sm-4 text-xs-right">Data Version:</span><strong>{{ user.getUserDataVersion() }}</strong></p>
+        <p><span class="col-sm-4 text-xs-right">Created At:</span><strong>{{ (user.getTimers().createdAt * 1000) | date:'medium':UTC }}</strong></p>
+        <p><span class="col-sm-4 text-xs-right">Saved At:</span><strong>{{ (user.getTimers().savedAt * 1000) | date:'medium':UTC }}</strong></p>
+
+        <div class="btn-toolbar text-xs-center" ng-if="user != null">
+          <br>
+          <label class="btn btn-secondary"><input type="checkbox" ng-model="userForm.showFlags"> Flags </label>
+          <label class="btn btn-secondary"><input type="checkbox" ng-model="userForm.showCounters"> Counters </label>
+          <label class="btn btn-secondary"><input type="checkbox" ng-model="userForm.showTimers"> Timers </label>
+          <label class="btn btn-secondary"><input type="checkbox" ng-model="userForm.showTags"> Tags </label>
+          <label class="btn btn-secondary"><input type="checkbox" ng-model="userForm.showGameLogs"> Game Logs </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <form class="input-group" ng-submit="fetchUser()">
+        <input type="text" class="form-control" placeholder="Enter playFab ID here" ng-model="userForm.id" ng-disabled="isInputLocked">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary" ng-disabled="isInputLocked">Fetch User</button>
+        </span>
+      </form>
+    </div>
+  </div>
+
+  <!-- User Flags -->
+  <div class="card" ng-if="user != null && userForm.showFlags">
+    <h3 class="card-header text-xs-center">User Flags</h3>
+    <div class="card-block">
+      <pre class="text-muted">{{ user.getFlags() | json }}</pre>
+    </div>
+  </div>
+
+  <!-- User Counters -->
+  <div class="card" ng-if="user != null && userForm.showCounters">
+    <h3 class="card-header text-xs-center">User Counters</h3>
+    <div class="card-block">
+      <pre class="text-muted">{{ user.getCounters() | json }}</pre>
+    </div>
+  </div>
+
+  <!-- User Timers -->
+  <div class="card" ng-if="user != null && userForm.showTimers">
+    <h3 class="card-header text-xs-center">User Timers</h3>
+    <div class="card-block">
+      <pre class="text-muted">{{ user.getTimers() | json }}</pre>
+    </div>
+  </div>
+
+  <!-- User Tags -->
+  <div class="card" ng-if="user != null && userForm.showTags">
+    <h3 class="card-header text-xs-center">User Tags</h3>
+    <div class="card-block">
+      <pre class="text-muted">{{ user.getTags() | json }}</pre>
+    </div>
+  </div>
+
+  <!-- Game Logs -->
+  <div class="card" ng-if="user != null && userForm.showGameLogs">
+    <h3 class="card-header text-xs-center">Game Logs</h3>
+    <div class="card-block" ng-repeat="(logName, logList) in user.getGameLogs()">
+      <span><strong>{{ logName }}</strong></span>
+      <div ng-repeat="(logIndex, logEntry) in logList">
+        <span>{{ getTimestampDisplay(logEntry.ts) }} ({{ logEntry.msg }})</span>
+      </div>
+    </div>
+  </div>
+</div>

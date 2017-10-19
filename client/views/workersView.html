@@ -1,0 +1,39 @@
+<div ng-controller="WorkersController">
+	<div class="card" ng-if="user != null && !user.isOnDeprecatedVersion">
+		<h3 class="card-header text-xs-center">Workers (Level/XP progress to next level)</h3>
+		
+		<form class="input-group">
+			<div class="card-block">
+				<select class="form-control" ng-model="workerSelect" ng-init="workerSelect='None'">
+					<option value="None">Select Category or Name</option>
+					<option value="">----------</option>
+					<option value="All">All</option>
+					<option value="Owned">Owned</option>
+					<option value="Unowned">Unowned</option>
+					<option value="">----------</option>
+					<option ng-repeat="category in getWorkerCategories()" value="{{category}}">{{category}}</option>
+					<option value="">----------</option>
+					<option ng-repeat="workerName in getWorkerNames()" value="{{workerName}}">{{workerName}}</option>
+				</select>
+			</div>
+		</form>
+		
+		<div class="card-block check-element animate-show-hide" ng-show="workerSelect=='None' || workerSelect==''">
+			<p class="card-text text-xs-center">Make a selection above</p>
+		</div>
+		
+		<div ng-repeat="category in getWorkerCategories()">
+			<div class="card-block check-element animate-show-hide" ng-repeat="workerName in getWorkerNamesByCategory(category)" ng-show="workerSelect=='All' || workerSelect==category || workerSelect==workerName || (workerSelect=='Owned' && (getWorkerLevel(workerName)>0 || getWorkerXP(workerName)>0)) || (workerSelect=='Unowned' && !(getWorkerLevel(workerName)>0 || getWorkerXP(workerName)>0))">
+				<div style="word-wrap: break-word;">
+					<span><strong>{{ workerName }}</strong> ({{ getWorkerLevel(workerName) }}:{{ getWorkerXP(workerName) }})</span>
+				</div>
+				<form class="input-group" ng-submit="addWorkerXP(workerName, xp)">
+					<input type="text" class="form-control" ng-model="xp" ng-disabled="isInputLocked">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-primary" ng-disabled="isInputLocked">Add XP</button>
+					</span>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

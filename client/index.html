@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AdminApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <title>Office Space Admin</title> 
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+
+  <!-- AngularJS -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+  <!-- load modules -->
+  <script src="client.js"></script>
+  <script src="models/userModel.js"></script>
+  <script src="models/inboxModel.js"></script>
+  <script src="services/userService.js"></script>
+  <script src="controllers/userController.js"></script>
+  <script src="controllers/inboxController.js"></script>
+  <script src="controllers/resourcesController.js"></script>
+  <script src="controllers/eventResourcesController.js"></script>
+  <script src="controllers/bankAccountsController.js"></script>
+  <script src="controllers/itemsController.js"></script>
+  <script src="controllers/timeTravelController.js"></script>
+  <script src="controllers/workersController.js"></script>
+  <script src="utils/bigIntegerUtil.js"></script>
+  <script src="utils/stringUtil.js"></script>
+</head>
+
+<body style="padding-top: 140px; padding-bottom: 20px;">
+  
+  <!-- header panel -->
+  <nav class="navbar navbar-fixed-top navbar-dark bg-inverse" style="height: 115px;" ng-controller="navBarController">
+    <div class="container">
+      <a class="navbar-brand" href="#">Office Space Admin (v2.7.0)</a>
+      <label class="btn btn-success" ng-click="searchPlayers()"> Search Players </label>
+      <a class="navbar-brand pull-xs-right" href="#">{{ clock | date:'medium' }}</a>
+    </div>
+    <div class="container" ng-controller="messageController">
+      <div ng-if="message != null">
+        <div class="{{ message.messageClass }}" style="height: 55px; overflow: scroll;">{{ message.messageText }}</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- content panel -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6"><div ng-include="'views/userView.html'"></div></div>
+      <div class="col-sm-6"><div ng-include="'views/inboxView.html'"></div></div>
+    </div>
+    <div class="h-divider">
+    <div class="row">
+      <div class="col-sm-6"><div ng-include="'views/resourcesView.html'"></div></div>
+      <div class="col-sm-6"><div ng-include="'views/eventResourcesView.html'"></div></div>
+    </div>
+    <div class="h-divider">
+    <div class="row">
+      <div class="col-sm-6"><div ng-include="'views/bankAccountsView.html'"></div></div>
+      <div class="col-sm-6"><div ng-include="'views/itemsView.html'"></div></div>
+    </div>
+    <div class="h-divider">
+    <div class="row">
+      <div class="col-sm-6"><div ng-include="'views/timeTravelView.html'"></div></div>
+      <div class="col-sm-6"><div ng-include="'views/workersView.html'"></div></div>
+    </div>
+  </div>
+
+  <!-- jQuery first, then Tether, then Bootstrap JS. -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
+</body>
+
+</html>

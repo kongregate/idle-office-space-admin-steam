@@ -1,0 +1,38 @@
+<div ng-controller="ResourcesController">
+	<div class="card" ng-if="user != null && !user.isOnDeprecatedVersion">
+		<h3 class="card-header text-xs-center">Resources (Core Game)</h3>
+			
+			<form class="input-group">
+			<div class="card-block">
+				<select class="form-control" ng-model="resourceSelect" ng-init="resourceSelect='Default'">
+					<option value="None">Select Category or Name</option>
+					<option value="">----------</option>
+					<option value="All">All</option>
+					<option value="">----------</option>
+					<option ng-repeat="category in getResourceCategories()" value="{{category}}">{{category}}</option>
+					<option value="">----------</option>
+					<option ng-repeat="resourceName in getResourceNames()" value="{{resourceName}}">{{resourceName}}</option>
+				</select>
+			</div>
+		</form>
+		
+		<div class="card-block check-element animate-show-hide" ng-show="resourceSelect=='None' || resourceSelect==''">
+			<p class="card-text text-xs-center">Make a selection above</p>
+		</div>
+			
+		<div ng-repeat="category in getResourceCategories()">
+			<div class="card-block check-element animate-show-hide" ng-repeat="resourceName in getResourceNamesByCategory(category)" ng-show="resourceSelect=='All' || resourceSelect==category || resourceSelect==resourceName">
+				<div style="word-wrap: break-word;">
+					<span><strong>{{ resourceName }}</strong> ({{ BigIntegerUtil.abbreviateScientificNotation(user.getResource(resourceName)) }})</span>
+				</div>
+				<form class="input-group" ng-submit="addResource(resourceName, resourceAmount)">
+					<input type="text" class="form-control" ng-model="resourceAmount" ng-disabled="isInputLocked">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-primary" ng-disabled="isInputLocked">Add</button>
+					</span>
+				</form>
+			</div>
+		</div>
+		
+	</div>
+</div>

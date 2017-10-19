@@ -1,0 +1,17 @@
+<div ng-controller="BankAccountsController">
+  <div class="card" ng-if="user != null && !user.isOnDeprecatedVersion">
+    <h3 class="card-header text-xs-center">Bank Accounts</h3>
+    
+    <div class="card-block" ng-repeat="(accountName, depositAmount) in getBankAccountsInputList()">
+      <div style="word-wrap: break-word;">
+        <span><strong>{{ accountName }}</strong> ({{ user.getBankAccountAmount(accountName) }})</span>
+      </div>
+      <form class="input-group" ng-submit="addBankAccountDeposit(accountName, depositAmount)">
+        <input type="text" class="form-control" ng-model="depositAmount" ng-disabled="isInputLocked">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary" ng-disabled="isInputLocked">Add</button>
+        </span>
+      </form>
+    </div>
+  </div>
+</div>

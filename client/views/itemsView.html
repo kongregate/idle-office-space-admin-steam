@@ -1,0 +1,40 @@
+<div ng-controller="ItemsController">
+  <div class="card" ng-if="user != null && !user.isOnDeprecatedVersion">
+    <h3 class="card-header text-xs-center">Items</h3>
+    
+    <div class="card-block">
+      <div ng-if="isInventoryEmpty()">
+        <p class="card-text text-xs-center">Inventory is empty, Cid.</p>
+      </div>
+      <div ng-if="!isInventoryEmpty()" ng-repeat="(itemName, itemAmount) in getItemsInputList()">
+        <div style="word-wrap: break-word;">
+          <span><strong>{{ itemName }}</strong> ({{ user.getItem(itemName) }})</span>
+        </div>
+        <form class="input-group" ng-submit="addItem(itemName, itemAmount, false)">
+          <input type="number" class="form-control" ng-model="itemAmount" ng-disabled="isInputLocked">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary" ng-disabled="isInputLocked">Add</button>
+          </span>
+        </form>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <form ng-submit="addItem(itemsForm.newItemName, itemsForm.newItemAmount, true)">
+        <div class="input-group">
+          <span class="input-group-addon">Item Name</span>
+          <input type="text" class="form-control" ng-model="itemsForm.newItemName" ng-disabled="isInputLocked">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon">Item Amount</span>
+          <input type="number" class="form-control" ng-model="itemsForm.newItemAmount" ng-disabled="isInputLocked">
+        </div>
+        <br>
+        <div>
+          <button type="submit" class="btn btn-primary btn-block" ng-disabled="isAddNewItemLocked()">New Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

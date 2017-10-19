@@ -1,0 +1,49 @@
+<div ng-controller="InboxController">
+	<div class="card" ng-if="user != null && !user.isOnDeprecatedVersion">
+		<h3 class="card-header text-xs-center">Inbox</h3>
+	
+		<form class="input-group">
+			<div class="card-block">
+				<select class="form-control" ng-model="inboxSelect" ng-init="inboxSelect='None'">
+					<option value="None">Select Claimed/Unclaimed</option>
+					<option value="">----------</option>
+					<option value="All">All</option>
+					<option value="">----------</option>
+					<option value="Claimed">Claimed</option>
+					<option value="Unclaimed">Unclaimed</option>
+				</select>
+			</div>
+		</form>
+		
+		<div class="card-block check-element animate-show-hide" ng-if="inbox.isInboxEmpty()">
+			<p class="card-text text-xs-center">Inbox is empty, Pete.</p>
+		</div>
+	
+		<div class="card-block" ng-if="!inbox.isInboxEmpty()">
+			<div class="check-element animate-show-hide" ng-show="inboxSelect=='None' || inboxSelect==''">
+				<p class="card-text text-xs-center">Make a selection above</p>
+			</div>
+			
+			<div class="check-element animate-show-hide" ng-repeat="data in inbox.getInboxItems() track by $index" ng-show="inboxSelect=='All' || (inboxSelect=='Claimed' && inbox.isInboxItemClaimed(data)) || (inboxSelect=='Unclaimed' && !inbox.isInboxItemClaimed(data))">
+				<div class="card">
+					<div class="card-header">
+						<form ng-confirm-submit="deleteInboxItem($index)" ng-confirm-message="Are you sure you want to delete {{data.awardTimestamp}}?">
+							<button type="submit" class="btn btn-danger btn-sm" ng-if="!inbox.isInboxItemClaimed(data)" ng-disabled="isInputLocked">X</button>
+							<label><strong>{{data.awardTimestamp}}</strong></label>
+						</form>
+					</div>
+					<div class="card-block text-xs-center">
+						<strong>{{ getDataDisplay(data) }}</strong><br><br>
+						<label><strong>{{ getAwardTimestampDisplay(data) }}</strong></label><br>
+						<div ng-if="inbox.isInboxItemClaimed(data)">
+							<label class="text-success"><strong>{{ getClaimTimestampDisplay(data) }}</strong></label>
+						</div>
+						<div ng-if="!inbox.isInboxItemClaimed(data)">
+							<label class="text-danger"><strong>Not claimed yet.</strong></label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

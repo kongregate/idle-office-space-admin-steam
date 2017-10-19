@@ -1,0 +1,20 @@
+<div ng-controller="EventResourcesController">
+  <div class="card" ng-if="user != null && !user.isOnDeprecatedVersion">
+    <h3 class="card-header text-xs-center">Resources (Event)</h3>
+    
+    <div class="card-block" ng-repeat="(resourceName, resourceAmount) in getEventResourcesInputList()">
+      <div style="word-wrap: break-word;">
+        <span><strong>{{ resourceName }}</strong></span>
+        <span ng-repeat="(eventName, eventResourceDisplay) in getEventResources(resourceName)">
+          <br>{{ eventName }} ({{ BigIntegerUtil.abbreviateScientificNotation(eventResourceDisplay) }})
+        </span>
+      </div>
+      <form class="input-group" ng-submit="addEventResource(resourceName, resourceAmount)">
+        <input type="text" class="form-control" ng-model="resourceAmount" ng-disabled="isInputLocked">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary" ng-disabled="isInputLocked">Add</button>
+        </span>
+      </form>
+    </div>
+  </div>
+</div>
