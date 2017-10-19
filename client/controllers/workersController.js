@@ -112,30 +112,6 @@ app.controller("WorkersController", function($rootScope, $scope, UserService) {
 			"Stan_Summer",
 			"Steve_Summer",
 			"Tom_Summer"
-		],
-		"Spooky": [
-			"Brian_Halloween",
-			"FemaleTemp_Halloween",
-			"Laura_Halloween",
-			"Nina_Halloween",
-			"DrSwanson_Halloween",
-			"Anne_Halloween",
-			"Peggy_Halloween",
-			"Joanna_Halloween",
-			"Lumbergh_Halloween",
-			"BobPorter_Halloween",
-			"BobSlydell_Halloween",
-			"Dom_Halloween",
-			"Steve_Halloween",
-			"Lawrence_Halloween",
-			"Peter_Halloween",
-			"Michael_Halloween",
-			"Samir_Halloween",
-			"Drew_Halloween",
-			"Milton_Halloween",
-			"Rob_Halloween",
-			"Tom_Halloween",
-			"Stan_Halloween"
 		]
 	};
 	

@@ -8,7 +8,7 @@ app.controller("navBarController", function($scope, $window, $interval) {
      $interval(function () { $scope.clock = Date.now(); }, 1000);
 
      $scope.searchPlayers = function() {
-        return $window.open("https://developer.playfab.com/en-us/1F6/players", '_blank');
+        return $window.open("https://developer.playfab.com/en-us/DF5E/players", '_blank');
      };
 });
 

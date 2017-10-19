@@ -11,12 +11,12 @@ app.controller("UserController", function($rootScope, $scope, $window, UserModel
     };
 
     $scope.showEventHistory = function() {
-        var url = "https://developer.playfab.com/en-us/1F6/players/" + $rootScope.user.getPlayFabId() + "/event-history";
+        var url = "https://developer.playfab.com/en-us/DF5E/players/" + $rootScope.user.getPlayFabId() + "/event-history";
         $window.open(url, '_blank');
     };
 
     $scope.showIAPs = function() {
-        var url = "https://developer.playfab.com/en-us/1F6/players/" + $rootScope.user.getPlayFabId() + "/purchases";
+        var url = "https://developer.playfab.com/en-us/DF5E/players/" + $rootScope.user.getPlayFabId() + "/purchases";
         $window.open(url, '_blank');
     };
     

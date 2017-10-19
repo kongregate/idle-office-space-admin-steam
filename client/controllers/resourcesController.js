@@ -3,36 +3,15 @@ var app = angular.module("AdminApp");
 app.controller("ResourcesController", function($rootScope, $scope, UserService) {
 	$scope.resourceNamesByCategory = {
 		"Default": [
+			"Points",
 			"Prestige",
 			"Premium",
 			"CrossEvent"
-		],
-		"Point": [
-			"Points",
-			"Points2",
-			"Points3",
-			"Points4"
 		],
 		"Mission": [
 			"Mission1",
 			"Mission2",
 			"Mission3"
-		],
-		"Supply": [
-			"Supply1",
-			"Supply2",
-			"Supply3",
-			"Supply4",
-			"Supply5",
-			"Supply6",
-			"Supply7",
-			"Supply8"
-		],
-		"Plan": [
-			"Plan1",
-			"Plan2",
-			"Plan3",
-			"Plan4"
 		]
 	};
 	
