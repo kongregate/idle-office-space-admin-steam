@@ -5,8 +5,7 @@ app.controller("ResourcesController", function($rootScope, $scope, UserService) 
 		"Default": [
 			"Points",
 			"Prestige",
-			"Premium",
-			"CrossEvent"
+			"Premium"
 		],
 		"Mission": [
 			"Mission1",
