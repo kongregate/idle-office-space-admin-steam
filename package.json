@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "5.9.1"
+    "node": "8.6.0"
   },
   "scripts": {
     "start": "node server/server.js"
@@ -12,6 +12,6 @@
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "http-auth": "^2.4.4",
-    "playfab-sdk": "^1.0.170130"
+    "playfab-sdk": "^1.13.171016"
   }
 }
