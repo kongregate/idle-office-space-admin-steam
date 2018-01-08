@@ -112,7 +112,31 @@ app.controller("WorkersController", function($rootScope, $scope, UserService) {
 			"Stan_Summer",
 			"Steve_Summer",
 			"Tom_Summer"
-		]
+		],
+		"Holiday": [
+			"Stan_Holiday",
+			"BobPorter_Holiday",
+			"BobSlydell_Holiday",
+			"Lumbergh_Holiday",
+			"Anne_Holiday",
+			"Dom_Holiday",
+			"FemaleTemp_Holiday",
+			"Rob_Holiday",
+			"DrSwanson_Holiday",
+			"Steve_Holiday",
+			"Lawrence_Holiday",
+			"Brian_Holiday",
+			"Peggy_Holiday",
+			"Milton_Holiday",
+			"Joanna_Holiday",
+			"Laura_Holiday",
+			"Tom_Holiday",
+			"Michael_Holiday",
+			"Peter_Holiday",
+			"Nina_Holiday",
+			"Samir_Holiday",
+			"Drew_Holiday"
+		]		
 	};
 	
 	$scope.getWorkerCategories = function() {
